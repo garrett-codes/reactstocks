@@ -12,10 +12,6 @@ code {
     monospace;
 }
 
-body {
-  margin: 40px;
-}
-
 .wrapper {
   display: grid;
   grid-template-columns: 150px 150px 150px 150px 150px 150px;
