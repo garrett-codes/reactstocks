@@ -1,26 +1,26 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import StocksContainer from './containers/StocksContainer'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  state = {
+    stocks: []
+  }
+
+  componentDidMount = () => {
+    fetch('https://financialmodelingprep.com/api/v3/company/stock/list')
+    .then(res => res.json())
+    .then(stockData => this.setState({stocks: stockData.symbolsList}))
+  }
+  render() {
+    return (
+      <div className="App">
+        {this.state.stocks.length > 0 ? <StocksContainer stockData={this.state.stocks}/> : null}
+      </div>
+    );
+  }
 }
 
 export default App;
